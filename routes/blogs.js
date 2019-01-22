@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     console.log("request")
-    res.header('Content-Type', 'application/json; charset=utf-8')
+    res.header('Content-Ty-+pe', 'application/json; charset=utf-8')
 
     let params = req.query;
     let title = params.title;
@@ -31,7 +31,55 @@ router.get('/', function (req, res) {
 
     }
 
+});
+
+// 插卡某一偏博客的详情页面
+router.get("/:blogId", function (request, response) {
+    // 创建假数据
+    // for (let i=0;i<5;i++){
+    //     models.Blog.create({
+    //         title: "test"
+    //     })
+    // }
+
+    let params = request.params;
+    models.Blog.findOne({
+        where: {
+            id: params.blogId
+        }
+    }).then(function (result) {
+        response.header('Content-Type', 'application/json; charset=utf-8')
+        console.log(result)
+        response.send(result)
+    }).catch(function (err) {
+        console.log(err)
+    })
+})
+
+
+// 偏博客的详情页面
+router.put("/:blogId", function (request, response) {
+
+    let body = request.body;
+    let params = request.params;
+
+
+    models.Blog.update(
+        {title: body.title},
+        {
+            where: {id: params.blogId}
+        }
+    )
+        .then(function (rowsUpdated) {
+            console.log(rowsUpdated, typeof rowsUpdated)
+            response.send(body)
+        }).catch(function (err) {
+        console.log(err)
+        response.send(body)
+
+    })
 
 });
+
 
 module.exports = router;
