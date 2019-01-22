@@ -1,4 +1,4 @@
 .idea/
 bin
-node_modules
-OUTPUT
+node_modules/
+OUTPUT/
