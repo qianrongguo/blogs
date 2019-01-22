@@ -5,19 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res) {
     console.log("request")
     res.header('Content-Type', 'application/json; charset=utf-8')
-// res.send({hello:"world"})
-//     return
 
-
-    // console.log(models.Blog)
-    // 插入测试数据
-    // for (i = 0; i < 20; i++) {
-    //     models.Blog.create({
-    //         title: i,
-    //         content: "这个是博客内容",
-    //         author: " 作者"
-    //     });
-    // }
     let params = req.query;
     let title = params.title;
     console.log(title)
