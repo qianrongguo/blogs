@@ -3,6 +3,12 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
+
+
+    // test insert
+    // models.Blog.create({title: "title2"})
+
+
     res.header('Content-Ty-+pe', 'application/json; charset=utf-8')
     let params = req.query;
     let title = params.title;
@@ -90,15 +96,17 @@ router.post("/", function (request, response) {
 });
 
 //删除博客
-router.delete("/", function (request, response) {
-    let body = request.body;
-    models.Blog.destroy({ where:
-            {title: body.title},force:true})
-        .then(task => {
-        console.log(task)
-        response.header('Content-Type', 'application/json; charset=utf-8')
-        response.sendStatus(200);
+router.delete("/:blogId", function (request, response) {
+    let body = request.params;
+    models.Blog.destroy({
+        where:
+            {id: body.blogId}, force: true
     })
+        .then(task => {
+            console.log(task)
+            response.header('Content-Type', 'application/json; charset=utf-8')
+            response.sendStatus(200);
+        })
 
 
 });

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 
 export default class Blog extends Component {
 
@@ -11,8 +10,15 @@ export default class Blog extends Component {
 
     render() {
         return (
+
             <div>
-                <p>{this.props.data.title}</p>
+                <div>
+                    <h2>
+                        {this.props.data.title}
+
+                    </h2>
+                    <button onClick={()=> this.props.action(this.props.data.id) }>Delete</button>
+                </div>
             </div>)
     }
 
