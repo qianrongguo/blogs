@@ -8,7 +8,6 @@ router.get('/', function (req, res) {
 
     let params = req.query;
     let title = params.title;
-    console.log(title)
     if (title !== undefined) {
         models.Blog.findAll({
             raw: true, where: {
@@ -57,7 +56,7 @@ router.get("/:blogId", function (request, response) {
 })
 
 
-// 偏博客的详情页面
+// 编辑博客的详情页面
 router.put("/:blogId", function (request, response) {
 
     let body = request.body;
@@ -78,6 +77,32 @@ router.put("/:blogId", function (request, response) {
         response.send(body)
 
     })
+
+});
+
+
+// 新增博客
+router.post("/", function (request, response) {
+
+    let body = request.body;
+    let params = request.params;
+
+
+    // for (let i=0;i<5;i++){
+    //     models.Blog.create({
+    //         title: "test"
+    //     })
+    // }
+
+
+    models.Blog.create({title: body.title}).then(task => {
+        // you can now access the newly created task via the variable task
+        console.log(task)
+        response.header('Content-Type', 'application/json; charset=utf-8')
+        response.sendStatus(200);
+    })
+
+
 
 });
 

@@ -9,16 +9,29 @@ var usersRouter = require('./routes/users');
 var blogsRouter = require('./routes/blogs');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }))
+
+
+const middler = function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log("--------", req.method)
+    if (req.method === "OPTION") {
+        res.sendStatus(204)
+    } else {
+        next()
+    }
+};
+app.use(middler)
+
+
+app.use(bodyParser.urlencoded({extended: false}))
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json())
-
-
 
 
 app.use('/', indexRouter);
@@ -26,3 +39,6 @@ app.use('/users', usersRouter);
 app.use('/blogs', blogsRouter);
 
 module.exports = app;
+
+
+
