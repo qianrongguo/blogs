@@ -6,7 +6,7 @@ let Sequelize = require('sequelize');
 let basename = path.basename(__filename);
 let password = process.env.Password ;
 console.log(password,"----")
-password = "123456"
+password = "Ll139196"
 let db = {};
 
 
