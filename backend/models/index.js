@@ -4,9 +4,9 @@ let fs = require('fs');
 let path = require('path');
 let Sequelize = require('sequelize');
 let basename = path.basename(__filename);
-let password = process.env.Password ;
+let password = process.env.PASSWORD;
 console.log(password,"----")
-password = "123456"
+// password = "123456"
 let db = {};
 
 

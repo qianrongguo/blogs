@@ -24,6 +24,7 @@ export default class Blogs extends Component {
     }
 
 
+
 // delete blogs
     handleDelete(blogID) {
         console.log("------")
@@ -32,7 +33,10 @@ export default class Blogs extends Component {
             method: 'delete'
         }).then(response => {
             console.log(response);
-            this.setState({isFetching: true})
+            fetch('http://localhost:3000/blogs')
+                .then(response => response.json())
+                .then(data => this.setState({datas: data, isFetching: false}));
+            // this.setState({isFetching: false})
         }).then(()=>{
             // this.setState({isDeleted: false})
 
@@ -40,8 +44,9 @@ export default class Blogs extends Component {
 
         catch(err => console.log(err))
 
-
     }
+
+
 
 
     render() {
@@ -55,7 +60,7 @@ export default class Blogs extends Component {
 
                 ) : (
                     <div>{this.state.datas.map((data, index) => {
-                        return <Blog data={data} key={index} action={this.handleDelete}/>
+                        return <Blog data={data} key={index} action={this.handleDelete}  />
                     })}</div>
 
                 )}
