@@ -6,7 +6,7 @@ router.get('/', function (req, res) {
 
 
     // test insert
-    models.Blog.create({title: "title2"})
+    // models.Blog.create({title: "title2"})
 
 
     res.header('Content-Ty-+pe', 'application/json; charset=utf-8')
@@ -103,7 +103,7 @@ router.delete("/:blogId", function (request, response) {
             {id: body.blogId}, force: true
     })
         .then(task => {
-            console.log(task)
+            console.log(task,'FFFFFFFFFFFFFFF')
             response.header('Content-Type', 'application/json; charset=utf-8')
             response.sendStatus(200);
         })

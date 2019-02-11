@@ -1,4 +1,4 @@
-import {SELECT_DELETE} from '../actions'
+import {SELECT_DELETE,REQUEST_BLOGS,RECEIVE_BLOGS} from '../actions'
 
 const posts = (state={
     isFetching:true
@@ -7,7 +7,18 @@ const posts = (state={
         case SELECT_DELETE:
             return {
                 ...state,
+                isFetching:false,
+            }
+        case REQUEST_BLOGS:
+            return {
+                ...state,
                 isFetching:true
+            }
+        case RECEIVE_BLOGS:
+            return {
+                ...state,
+                response:action.response,   //将response整合到this.props
+                isFetching:false
             }
         default:
             return{
@@ -18,15 +29,5 @@ const posts = (state={
 }
 
 
-const deleteSubreddit = (state={},action) => {
-    switch (action.type){
-        case SELECT_DELETE:
-            return {...state,[action.subreddit]:posts(state[action.subreddit],action)}
-        default:
-            debugger
-            return state
-    }
-}
 
-
-export default deleteSubreddit
+export default posts
