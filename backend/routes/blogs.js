@@ -6,7 +6,7 @@ router.get('/', function (req, res) {
 
 
     // test insert
-    // models.Blog.create({title: "title2"})
+    models.Blog.create({title: "title2"})
 
 
     res.header('Content-Ty-+pe', 'application/json; charset=utf-8')

@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-export default class Blog extends Component {
-
-
-    constructor(props) {
-        super(props);
-    }
-
+class Blog extends Component {
 
     render() {
         return (
@@ -17,10 +12,18 @@ export default class Blog extends Component {
                         {this.props.data.title}
 
                     </h2>
-                    <button onClick={()=> this.props.action(this.props.data.id) }>Delete</button>
+                    <button onClick={() => this.props.action(this.props.data.id)}>Delete</button>
                 </div>
             </div>)
     }
 
+}
+
+Blog.prototype = {
+    data:PropTypes.string.isRequired,
+    action:PropTypes.func.isRequired,
+    id:PropTypes.number.isRequired
 
 }
+
+export default  Blog

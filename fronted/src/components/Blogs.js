@@ -1,71 +1,75 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Blog from "./Blog";
+import {fetchBlog, fetchBlogs} from "../actions";
+import { connect } from 'react-redux'
 
-export default class Blogs extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            datas: null,
-            isFetching: true,
-            isDeleted: false,
-        };
-
-        this.handleDelete = this.handleDelete.bind(this)
+class Blogs extends Component {
+    static propTypes = {
+        isFetching:PropTypes.bool.isRequired,
+        datas:PropTypes.arrayOf.isRequired,
+        handleDelete:PropTypes.func.isRequired
     }
-
 
     componentDidMount() {
-        fetch('http://localhost:3000/blogs')
-            .then(response => response.json())
-            .then(data => this.setState({datas: data, isFetching: false}));
+        debugger
+        const {dispatch,selectedDelete} = this.props
+        dispatch(fetchBlog(selectedDelete))
+        // fetch('http://localhost:3000/blogs')
+        //     .then(response => response.json())
+        //     .then(data => this.setState({datas: data, isFetching: false}));
     }
 
 
 
-// delete blogs
     handleDelete(blogID) {
-        console.log("------")
-        const baseUrl = "http://localhost:3000/blogs";
-        fetch(baseUrl + '/' + blogID, {
-            method: 'delete'
-        }).then(response => {
-            console.log(response);
-            fetch('http://localhost:3000/blogs')
-                .then(response => response.json())
-                .then(data => this.setState({datas: data, isFetching: false}));
-            // this.setState({isFetching: false})
-        }).then(()=>{
-            // this.setState({isDeleted: false})
-
-        }).
-
-        catch(err => console.log(err))
-
+        // console.log("------")
+        // const baseUrl = "http://localhost:3000/blogs";
+        // fetch(baseUrl + '/' + blogID, {
+        //     method: 'delete'
+        // }).then(response => {
+        //     // console.log(response);
+        //     fetch('http://localhost:3000/blogs')
+        //         .then(response => response.json())
+        //         .then(data => this.setState({datas: data, isFetching: false}));
+        //     // this.setState({isFetching: false})
+        // }).then(()=>{
+        //     // this.setState({isDeleted: false})
+        //
+        // }).
+        // catch(err => console.log(err))
+        // const {fetchBlogs} = this.props
+        const {dispatch} = this.props
+        dispatch(fetchBlogs(blogID))
     }
-
-
-
 
     render() {
-        const isFetching = this.state.isFetching ;
-        console.log(this.state.datas)
-        // console.log(this.state.isDeleted,this.state.isFetching);
+        // const {isFetching,datas,handleDelete} = this.props;
+        debugger
         return (
-            <div>
-                {isFetching ? (
-                    <p>343</p>
+        <div>
+                {this.props.isFetching ? (
+                    <p>loding</p>
 
                 ) : (
-                    <div>{this.state.datas.map((data, index) => {
-                        return <Blog data={data} key={index} action={this.handleDelete}  />
+                    <div>{this.props.datas.map((data, index) => {
+                        return <Blog data={data} key={index} action={this.handleDelete.bind(this)}  />
                     })}</div>
 
                 )}
             </div>)
     }
-
-
 }
+
+const mapStateToProps = state => {
+    debugger
+
+    return {
+        datas:state,
+        isFetching:true
+    }
+}
+
+
+export default connect(mapStateToProps)(Blogs)
