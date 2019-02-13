@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Blog from "./Blog";
 import {fetchBlog,fetchBlogdelete} from "../actions";
 import {connect} from 'react-redux'
+import Edit from './Edit'
 
 
 class Blogs extends Component {
@@ -21,8 +22,20 @@ class Blogs extends Component {
         dispatch(fetchBlogdelete(blogID))
     }
 
+    //修改数据事件
+    handleModify(blogId) {
+        fetch(`http://localhost:3000/blogs/${blogId}`, {method: 'PUT', title: 'hello'})
+            .then(response => {
+                return response.url
+            })
+            .then((result) => {
+                console.log(result, '+++++++++++')
+            })
+        window.location = '/Users/qian/WebstormProjects/blogs/fronted/src/Edit';
+    }
 
-    render() {
+
+    render(){
         return (
             <div>
                 {this.props.isFetching ? (
@@ -30,7 +43,7 @@ class Blogs extends Component {
                 ) : (
                     <div>
                         {this.props.response.map((data, index) => {
-                            return <Blog data={data} key={index} delete={this.handleDelete.bind(this)}/>
+                            return <Blog data={data} key={index} delete={this.handleDelete.bind(this)} modify={this.handleModify.bind(this)}/>
                         })}
 
                     </div>

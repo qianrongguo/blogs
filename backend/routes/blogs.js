@@ -87,7 +87,7 @@ router.post("/", function (request, response) {
     let body = request.body;
 
     models.Blog.create({title: body.title}).then(task => {
-        console.log(task)
+        // console.log(task)
         response.header('Content-Type', 'application/json; charset=utf-8')
         response.sendStatus(200);
     })
@@ -103,7 +103,7 @@ router.delete("/:blogId", function (request, response) {
             {id: body.blogId}, force: true
     })
         .then(task => {
-            console.log(task,'FFFFFFFFFFFFFFF')
+            // console.log(task,'FFFFFFFFFFFFFFF')
             response.header('Content-Type', 'application/json; charset=utf-8')
             response.sendStatus(200);
         })
