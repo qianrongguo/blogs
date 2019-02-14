@@ -27,6 +27,7 @@ export const receive_blogs = (response) => {
 
 //主要是用来加载数据的
 export const fetchBlog = () => dispatch => {
+    // debugger;
 //请求数据时在redux上设置属性节点
     dispatch(request_blogs())
     fetch('http://localhost:3000/blogs')

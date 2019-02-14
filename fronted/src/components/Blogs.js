@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Blog from "./Blog";
+import Blog from "../components/Blog";
 import {fetchBlog,fetchBlogdelete} from "../actions";
 import {connect} from 'react-redux'
 import Edit from './Edit'
@@ -31,7 +31,6 @@ class Blogs extends Component {
             .then((result) => {
                 console.log(result, '+++++++++++')
             })
-        window.location = '/Users/qian/WebstormProjects/blogs/fronted/src/Edit';
     }
 
 
@@ -45,7 +44,6 @@ class Blogs extends Component {
                         {this.props.response.map((data, index) => {
                             return <Blog data={data} key={index} delete={this.handleDelete.bind(this)} modify={this.handleModify.bind(this)}/>
                         })}
-
                     </div>
                 )
                 }
