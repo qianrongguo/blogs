@@ -14,7 +14,7 @@ class Blog extends Component {
                     </h2>
                     <button onClick={() => this.props.delete(this.props.data.id)}>Delete</button>
                     <ul>
-                        <li><Link to='edit'>edit</Link></li>
+                        <li><Link to={`edit/${this.props.data.id}`}> edit </Link> </li>
                     </ul>
                 </div>
             </div>

@@ -1,21 +1,74 @@
 import React, {Component} from 'react'
-import {Route,Link,Switch} from 'react-router-dom'
+import {Route, Link, Switch} from 'react-router-dom'
+import {onSubmit,request_blogs, RECEIVE_BLOGS, UPDATE_FIELD_EDITOR,EDITOR_PAGE_LOADED, fetchEdit} from "../actions";
+import {connect} from 'react-redux';
 
 
-class Edit extends Component{
+let mapStateToProps = state => {
+    console.log(state.Blog.blog, '44444')
+    return {
+        title: state.Blog.blog
+    }
+}
+
+// let mapDispatchToProps = dispatch => ({
+//     onLoad: payload =>
+//         dispatch({type: EDITOR_PAGE_LOADED, payload}),
+//     onUpdateField: (key, value) =>
+//         dispatch({type: UPDATE_FIELD_EDITOR, key, value})
+// })
+
+
+class Edit extends Component {
+    // constructor(props) {
+    //     super(props)
+    //     const updateFieldEvent =
+    //         key => ev => this.props.onUpdateField(key, ev.target.value);
+    //     this.changeTitle = updateFieldEvent('title')
+    //
+    // }
+
+    componentWillMount() {
+        let slug = this.props.match.params.slug;
+        const {dispatch} = this.props
+        if (slug) {
+            return dispatch(fetchEdit(slug))
+        }
+    }
+
+    // handleChnageTitle(event){
+    //     console.log(event.target.value,'6666666666666')
+    // this.setState({
+    //     title:event.target.value
+    // })
+    // }
+
+    componentWillUnmount() {
+        this.props.onLoad()
+    }
+
     render() {
+
         return (
             <div>
                 <form>
-                    title: <input type="text" value=" " placeholder="请填写你的标题"/>
-                    content:<input type="text" value=" " placeholder="请填写你的标题"/>
-                    <button>提交</button>
+                    <fieldset>
+                        <fieldset>
+                            <input
+                                placeholder="Title"
+                                value={this.props.title}
+                                onChange={this.changeTitle}
+                            />
+                        </fieldset>
+                        <button
+                            type="submit">
+                            submit
+                        </button>
+                    </fieldset>
                 </form>
-
             </div>
         )
     }
 }
 
-
-export default Edit
+export default connect(mapStateToProps)(Edit)

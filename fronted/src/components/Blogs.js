@@ -7,8 +7,7 @@ import Edit from './Edit'
 
 
 class Blogs extends Component {
-
-    componentDidMount() {
+    componentWillMount(){
         const {dispatch} = this.props
         //render渲染结束后加载数据库数据
         dispatch(fetchBlog())
@@ -16,7 +15,6 @@ class Blogs extends Component {
 
     //点击删除事件
     handleDelete(blogID) {
-        // console.log(blogID,'uuuuuuuuuuu')
         const {dispatch} = this.props
         //运行fetchBlogdelete方法执行删除请求同步数据
         dispatch(fetchBlogdelete(blogID))
@@ -24,7 +22,7 @@ class Blogs extends Component {
 
     //修改数据事件
     handleModify(blogId) {
-        fetch(`http://localhost:3000/blogs/${blogId}`, {method: 'PUT', title: 'hello'})
+        fetch(`http://localhost:3000/blogs/${blogId}`, {method: 'PUT'})
             .then(response => {
                 return response.url
             })
@@ -37,11 +35,11 @@ class Blogs extends Component {
     render(){
         return (
             <div>
-                {this.props.isFetching ? (
+                {this.props.posts.isFetching ? (
                     <p>loding</p>
                 ) : (
                     <div>
-                        {this.props.response.map((data, index) => {
+                        {this.props.posts.response.map((data, index) => {
                             return <Blog data={data} key={index} delete={this.handleDelete.bind(this)} modify={this.handleModify.bind(this)}/>
                         })}
                     </div>
