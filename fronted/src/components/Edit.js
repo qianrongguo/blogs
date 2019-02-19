@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Route, Link, Switch} from 'react-router-dom'
-import {onSubmit,request_blogs, RECEIVE_BLOGS, UPDATE_FIELD_EDITOR,EDITOR_PAGE_LOADED, fetchEdit} from "../actions";
+import {onSubmit, request_blogs, RECEIVE_BLOGS, UPDATE_FIELD_EDITOR, EDITOR_PAGE_LOADED, fetchEdit} from "../actions";
 import {connect} from 'react-redux';
 
 
@@ -20,17 +20,15 @@ let mapStateToProps = state => {
 
 
 class Edit extends Component {
-    // constructor(props) {
-    //     super(props)
-    //     const updateFieldEvent =
-    //         key => ev => this.props.onUpdateField(key, ev.target.value);
-    //     this.changeTitle = updateFieldEvent('title')
-    //
-    // }
+
+    constructor(props) {
+        super(props)
+    }
+
 
     componentWillMount() {
         let slug = this.props.match.params.slug;
-        const {dispatch} = this.props
+        const {dispatch} = this.props;
         if (slug) {
             return dispatch(fetchEdit(slug))
         }
@@ -43,9 +41,9 @@ class Edit extends Component {
     // })
     // }
 
-    componentWillUnmount() {
-        this.props.onLoad()
-    }
+    // componentWillUnmount() {
+    //     this.props.onLoad()
+    // }
 
     render() {
 
@@ -57,7 +55,7 @@ class Edit extends Component {
                             <input
                                 placeholder="Title"
                                 value={this.props.title}
-                                onChange={this.changeTitle}
+                                // onChange={this.changeTitle}
                             />
                         </fieldset>
                         <button
@@ -70,5 +68,6 @@ class Edit extends Component {
         )
     }
 }
+
 
 export default connect(mapStateToProps)(Edit)

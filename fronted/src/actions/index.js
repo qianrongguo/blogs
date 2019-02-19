@@ -54,30 +54,16 @@ export const fetchBlogdelete = (id) => dispatch => {
         })
 }
 
-//开始
-export const async_start = (id)  => {
-    return {
-        type:ASYNC_START,
-        id
-    }
-}
-//获取结束
-export const async_end = (id)  => {
-    return {
-        type:ASYNC_END,
-        id
-    }
-}
-
-export const onLoad = payload =>dispatch =>{
-    return dispatch({type: EDITOR_PAGE_LOADED, payload})
-}
-
-export const onUpdateField = (key,value) =>dispatch=> {
-    return dispatch({
-        type: UPDATE_FIELD_EDITOR, key, value
-    })
-}
+//
+// export const onLoad = payload =>dispatch =>{
+//     return dispatch({type: EDITOR_PAGE_LOADED, payload})
+// }
+//
+// export const onUpdateField = (key,value) =>dispatch=> {
+//     return dispatch({
+//         type: UPDATE_FIELD_EDITOR, key, value
+//     })
+// }
 
 
 
