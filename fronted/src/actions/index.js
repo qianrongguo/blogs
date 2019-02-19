@@ -1,20 +1,11 @@
 export const SELECT_DELETE = 'SELECT_DELETE'
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
-export const DELETE_SET_SUCCESS = 'DELETE_SET_SUCCESS'
-export const ASYNC_START = 'ASYNC_START'
-export const ASYNC_END = 'ASYNC_END'
-
-// export const ARTICLE_SUBMITTED = 'ARTICLE_SUBMITTED'
-export const UPDATE_FIELD_EDITOR = 'UPDATE_FIELD_EDITOR'
-export const EDITOR_PAGE_LOADED = 'EDITOR_PAGE_LOADED'
-// export const EDITOR_PAGE_UNLOADED = 'EDITOR_PAGE_UNLOADED'
-
 
 //点击选择删除
-export const select_delete =() => {
+export const select_delete = () => {
     return {
-        type:SELECT_DELETE,
+        type: SELECT_DELETE,
 
     }
 }
@@ -54,28 +45,17 @@ export const fetchBlogdelete = (id) => dispatch => {
         })
 }
 
-//
-// export const onLoad = payload =>dispatch =>{
-//     return dispatch({type: EDITOR_PAGE_LOADED, payload})
-// }
-//
-// export const onUpdateField = (key,value) =>dispatch=> {
-//     return dispatch({
-//         type: UPDATE_FIELD_EDITOR, key, value
-//     })
-// }
 
-
-
-//根据id获取文章
-export const fetchEdit = (id) => dispatch => {
-    dispatch(request_blogs())
-    fetch(`http://localhost:3000/blogs/${id}`)
-        .then(response => response.json())
-        .then((response) => {
-            console.log(response, '+++++++++++')
-            dispatch(receive_blogs(response))
-        })
+//提交修改数据
+export const updateField = (data, id) => {
+    fetch(`http://localhost:3000/blogs/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => console.log(response, '+++++++'))
+        .then(repsonse => console.log(repsonse, '___++++'))
 }
-
 

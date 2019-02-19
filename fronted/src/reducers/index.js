@@ -1,7 +1,8 @@
-import {SELECT_DELETE, REQUEST_BLOGS, RECEIVE_BLOGS, fetchBlog, EDITOR_PAGE_LOADED} from '../actions'
+import {SELECT_DELETE, REQUEST_BLOGS, RECEIVE_BLOGS} from '../actions'
+import {RECEIVE_BLOG,REQUEST_BLOG} from "../actions/blog";
 import {combineReducers} from 'redux'
 import {connectRouter} from 'connected-react-router'
-import editor from './editor';
+import editor from './editor'
 
 const posts = (state = {
     isFetching: true
@@ -35,24 +36,19 @@ const posts = (state = {
 //处理一篇文章   true标傲世不显示，false表示显示
 const Blog = (state = {fetchBlog:true}, action) => {
     switch (action.type) {
-        case REQUEST_BLOGS:
+        case REQUEST_BLOG:
             return {
                 ...state,
                 fetchBlog:true
             };
 
-        case RECEIVE_BLOGS:
+        case RECEIVE_BLOG:
             return {
                 ...state,
                 blog:action.response.title,
                 fetchBlog:false
             }
-        case EDITOR_PAGE_LOADED:
-            debugger;
-            return {
-                ...state,
-                title:action.response.title  //这里取值title
-            }
+
         default:
             return state
     }
@@ -61,6 +57,7 @@ const Blog = (state = {fetchBlog:true}, action) => {
 const rootReducer = (history) => combineReducers({
     posts: posts,
     Blog:Blog,
+    editor:editor,
     router: connectRouter(history)
 })
 
