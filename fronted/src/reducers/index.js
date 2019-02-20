@@ -3,6 +3,7 @@ import {RECEIVE_BLOG,REQUEST_BLOG} from "../actions/blog";
 import {combineReducers} from 'redux'
 import {connectRouter} from 'connected-react-router'
 import editor from './editor'
+import signup from './signup'
 
 const posts = (state = {
     isFetching: true
@@ -58,6 +59,7 @@ const rootReducer = (history) => combineReducers({
     posts: posts,
     Blog:Blog,
     editor:editor,
+    signup:signup,
     router: connectRouter(history)
 })
 

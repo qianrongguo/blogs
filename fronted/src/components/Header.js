@@ -10,6 +10,7 @@ class Header extends Component{
                 <ul>
                     <li><Link to='/'>blogs</Link></li>
                     <li><Link to='/edit'>New Post</Link></li>
+                    <li><Link to='/signup'>signup</Link></li>
                 </ul>
             </div>
         )

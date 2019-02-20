@@ -6,8 +6,7 @@ export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
 //点击选择删除
 export const select_delete = () => {
     return {
-        type: SELECT_DELETE,
-
+        type: SELECT_DELETE
     }
 }
 

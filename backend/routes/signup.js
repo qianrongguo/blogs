@@ -2,15 +2,16 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-    res.send('注册')
-});
+// router.get('/', function (req, res) {
+//     res.send('注册')
+// });
 
 router.post('/', function (req, res) {
     const body = req.body;
     const username = body.username;
     const password = body.password;
     const repassword = body.repassword;
+
     if (password.length === 0) {
         throw new Error('密码不能为空')
     } else if (username.length === 0) {
