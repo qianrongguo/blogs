@@ -9,10 +9,8 @@ class Header extends Component{
             <div>
                 <ul>
                     <li><Link to='/'>blogs</Link></li>
-                    <li><Link to='/edit'>edit</Link></li>
+                    <li><Link to='/edit'>New Post</Link></li>
                 </ul>
-
-
             </div>
         )
     }

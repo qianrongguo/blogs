@@ -2,6 +2,7 @@ export const SELECT_DELETE = 'SELECT_DELETE'
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
 
+
 //点击选择删除
 export const select_delete = () => {
     return {
@@ -46,8 +47,9 @@ export const fetchBlogdelete = (id) => dispatch => {
 }
 
 
+
 //提交修改数据
-export const updateField = (data, id) => {
+export const updateField = (data, id)  => {
     fetch(`http://localhost:3000/blogs/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
@@ -55,7 +57,22 @@ export const updateField = (data, id) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-    }).then(response => console.log(response, '+++++++'))
+    }).then(response => console.log(response,'66666666'))
         .then(repsonse => console.log(repsonse, '___++++'))
+
 }
 
+
+//创建一个数据
+export const createField = (data)  => {
+    fetch(`http://localhost:3000/blogs/`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => console.log(response,'66666666'))
+        .then(repsonse => console.log(repsonse, '___++++'))
+
+}

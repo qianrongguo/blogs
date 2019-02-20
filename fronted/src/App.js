@@ -1,5 +1,4 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 import { ConnectedRouter } from 'connected-react-router'
 import { Route, Switch } from 'react-router'
 import Edit from "./components/Edit";
@@ -12,6 +11,7 @@ const routes = (
         <Switch>
             <Route exact path="/" component={Blogs} />
             <Route path="/edit/:slug" component={Edit} />
+            <Route path="/edit" component={Edit} />
         </Switch>
     </div>
 )

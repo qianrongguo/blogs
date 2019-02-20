@@ -42,7 +42,9 @@ export const onSubmit = (payload) => {
     return {type: ARTICLE_SUBMITTED, payload}
 }
 
-
+export const onUnload = (payload) => {
+    return {type: EDITOR_PAGE_UNLOADED}
+}
 
 
 //根据id获取文章

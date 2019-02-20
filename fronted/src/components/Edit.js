@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {Route, Link, Switch} from 'react-router-dom'
-import {fetchEdit,onLoad,onSubmit,onUpdateField} from "../actions/blog";
-import {updateField} from '../actions'
+import {fetchEdit, onLoad, onSubmit, onUpdateField, onUnload} from "../actions/blog";
+import {updateField,createField} from '../actions'
 import {connect} from 'react-redux';
 
 
 let mapStateToProps = state => {
-    console.log(state.editor.title, '44444')
+    console.log(state.editor.title, '5555')
     return {
-        title:state.editor.title
+        title: state.editor.title
     }
 }
 
@@ -24,14 +24,29 @@ class Edit extends Component {
         this.changeTitle = updateFieldEvent('title');
         //提交
         this.submitForm = ev => {
+            debugger;
             ev.preventDefault()
             const title = {
-                title:this.props.title
+                title: this.props.title
             };
             let slug = this.props.match.params.slug;
-            let Promise = updateField(title,slug)
+            //这里将修改的数据提交上去
+            let Promise = slug ? updateField(title, slug) : createField(title);
             dispatch(onSubmit(Promise))
         }
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps, '444444444')
+        const {dispatch} = this.props;
+        if (this.props.match.params.slug !== nextProps.match.params.slug) {
+            if (nextProps.match.params.slug) {
+                let slug = this.props.match.params.slug;
+                return dispatch(onLoad(fetchEdit(slug)));
+            }
+        }
+        dispatch(onLoad(null));
     }
 
     componentWillMount() {
@@ -40,16 +55,14 @@ class Edit extends Component {
         if (slug) {
             return dispatch(onLoad(fetchEdit(slug)))
         }
+        dispatch(onUnload(null))
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillUnmount(){
         const {dispatch} = this.props;
-            if (nextProps.match.params.slug) {
-                let slug = this.props.match.params.slug;
-                return dispatch(onLoad(fetchEdit(slug)));
-            }
-            dispatch(onLoad(null));
+        dispatch(onUnload())
     }
+
 
     render() {
 
@@ -59,9 +72,8 @@ class Edit extends Component {
                     <fieldset>
                         <fieldset>
                             <input
-                                placeholder="Title"
-                                defaultValue={this.props.title}
-                                ref='title'
+                                placeholder="Article Title"
+                                value={this.props.title}
                                 onChange={this.changeTitle}
                             />
                         </fieldset>
