@@ -3,7 +3,7 @@ import {RECEIVE_BLOG,REQUEST_BLOG} from "../actions/blog";
 import {combineReducers} from 'redux'
 import {connectRouter} from 'connected-react-router'
 import editor from './editor'
-import signup from './signup'
+import SignUp from './signup'
 
 const posts = (state = {
     isFetching: true
@@ -48,20 +48,20 @@ const Blog = (state = {fetchBlog:true}, action) => {
                 ...state,
                 blog:action.response.title,
                 fetchBlog:false
-            }
+            };
 
         default:
             return state
     }
-}
+};
 
 const rootReducer = (history) => combineReducers({
     posts: posts,
     Blog:Blog,
     editor:editor,
-    signup:signup,
+    signup:SignUp,
     router: connectRouter(history)
-})
+});
 
 
 export default rootReducer

@@ -28,7 +28,10 @@ export const receive_blogs = (response) => {
 export const fetchBlog = () => dispatch => {
 //请求数据时在redux上设置属性节点
     dispatch(request_blogs())
-    fetch('http://localhost:3000/blogs')
+    fetch('http://localhost:3000/blogs',{method:'get',headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }})
         .then(response => response.json())
         .then(response => {
             dispatch(receive_blogs(response))

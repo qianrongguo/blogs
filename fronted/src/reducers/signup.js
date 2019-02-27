@@ -1,22 +1,31 @@
-import {UPDATE_FIELD_AUTH,REGISTER} from "../actions/signup";
+import {UPDATE_FIELD_AUTH, REGISTER, ReceiveToken} from "../actions/signup";
+import {LOGIN,REDIRECT} from "../actions/app"
 
+const defaultState = {
+    appName: 'Conduit',
+    token: null,
+    viewChangeCounter: 0
+};
 
-const signup = (state={},action) => {
+const SignUp = (state=defaultState,action) => {
     switch (action.type){
         case UPDATE_FIELD_AUTH:
             return {
                 ...state,
                 [action.key]:action.value
-            }
-        case REGISTER:
+            };
+
+        case ReceiveToken:
             return {
                 ...state,
-                data:action.username & action.password
-            }
+                token: action.token,
+                redirectTo:'/'
+            };
+
         default:
             return state
     }
 
-}
+};
 
-export default signup
+export default SignUp

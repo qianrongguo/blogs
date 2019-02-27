@@ -26,8 +26,8 @@ class Signup extends Component{
                 username:username,
                 password:password,
                 repassword:repassword
-            }
-            RegisterSbmit(data)
+            };
+            dispatch(register(RegisterSbmit(data)))
         }
     }
 

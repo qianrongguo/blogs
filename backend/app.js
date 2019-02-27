@@ -9,7 +9,6 @@ var usersRouter = require('./routes/users');
 var blogsRouter = require('./routes/blogs');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
-
 var app = express();
 
 
@@ -34,13 +33,14 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.use('/signup', signupRouter);
+app.use('/blogs', blogsRouter);
+app.use('/login', loginRouter);
 
+app.use(require('./middlewares/auth'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/blogs', blogsRouter);
-app.use('/login', loginRouter);
-app.use('/signup', signupRouter);
 
 module.exports = app;
 

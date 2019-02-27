@@ -1,15 +1,15 @@
 var models = require('../models');
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
 
 
     // test insert
     // models.Blog.create({title: "title2"})
 
-
-    res.header('Content-Ty-+pe', 'application/json; charset=utf-8')
+    res.header('Content-Ty-+pe', 'application/json; charset=utf-8');
     let params = req.query;
     let title = params.title;
     if (title !== undefined) {
@@ -33,6 +33,8 @@ router.get('/', function (req, res) {
         return
 
     }
+    // }
+
 
 });
 
