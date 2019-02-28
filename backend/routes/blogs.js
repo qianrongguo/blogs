@@ -90,7 +90,7 @@ router.post("/", function (request, response) {
 
     models.Blog.create({title: body.title}).then(task => {
         // console.log(task)
-        response.header('Content-Type', 'application/json; charset=utf-8')
+        response.header('Content-Type', 'application/json; charset=utf-8');
         response.sendStatus(200);
     })
 

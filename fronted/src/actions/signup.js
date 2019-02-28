@@ -80,8 +80,7 @@ export const fetchLogin = (data) => {
         },
         method: 'POST',
         body: JSON.stringify(data),
-    }).then(response => {
-        console.log(response,'ppppppppppp');
-        // dispatch(saveToken(repsonse));
-    }).catch(e => console.log(e))
+    }).then(response =>
+        response.json()
+    ).then(response=>console.log(response,'9999999999999')).catch(e => console.log(e))
 };
