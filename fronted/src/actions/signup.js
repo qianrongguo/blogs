@@ -1,6 +1,8 @@
 import {receive_blogs, request_blogs} from "./index";
 import agent from "../agent";
 export const LOGIN = 'LOGIN';
+export const ReceiveToken = "receive_token";
+
 
 
 export const UPDATE_FIELD_AUTH = 'UPDATE_FIELD_AUTH';
@@ -20,7 +22,7 @@ export const onChangeRePassword = value => {
 
 
 //创建一个数据
-// export const register = (username,password) => {
+
 export const RegisterSbmit = (data) => {
     fetch(`http://localhost:3000/signup`, {
         headers: {
@@ -35,20 +37,12 @@ export const RegisterSbmit = (data) => {
 };
 
 
-export const ReceiveToken = "receive_token";
 
 export const register = data => {
     return {type: REGISTER, data}
 };
 
-// export const onSubmit = (username,password) => {
-//     return {
-//         type:LOGIN,
-//         payload:agent.Auth.login(username,password)
-//     }
-// }
-
-
+//保存token
 const saveToken = token => {
     return {
         type: ReceiveToken,
@@ -56,23 +50,8 @@ const saveToken = token => {
     }
 };
 
-//
-// export const fetchLogin = (data) => dispatch => {
-//     fetch(`http://localhost:3000/login`, {
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         method: 'POST',
-//         body: JSON.stringify(data),
-//     }).then((repsonse) => {
-//         console.log(repsonse,'{{{{{{{{{{{++++++');
-//             dispatch(saveToken(repsonse));
-//         }).catch(e => console.log(e))
-// };
 
-
-export const fetchLogin = (data) => {
+export const fetchLogin = (data) => dispatch =>{
     fetch(`http://localhost:3000/login`, {
         headers: {
             'Accept': 'application/json',
@@ -82,5 +61,5 @@ export const fetchLogin = (data) => {
         body: JSON.stringify(data),
     }).then(response =>
         response.json()
-    ).then(response=>console.log(response,'9999999999999')).catch(e => console.log(e))
+    ).then(response=>{dispatch(saveToken(response))}).catch(e => console.log(e))
 };

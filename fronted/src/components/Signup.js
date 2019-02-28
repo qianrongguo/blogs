@@ -17,8 +17,6 @@ class Signup extends Component{
         this.changePassword = ev => dispatch(onChangePassword(ev.target.value));
         this.onChangeRePassword = ev => dispatch(onChangeRePassword(ev.target.value));
         this.submitForm  = ev => {
-            debugger;
-
             const username = this.props.username;
             const password = this.props.password;
             const repassword = this.props.repassword;

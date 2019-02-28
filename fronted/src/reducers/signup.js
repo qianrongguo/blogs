@@ -1,5 +1,4 @@
 import {UPDATE_FIELD_AUTH, REGISTER, ReceiveToken} from "../actions/signup";
-import {LOGIN,REDIRECT} from "../actions/app"
 
 const defaultState = {
     appName: 'Conduit',
@@ -21,7 +20,6 @@ const SignUp = (state=defaultState,action) => {
                 token: action.token,
                 redirectTo:'/'
             };
-
         default:
             return state
     }

@@ -23,8 +23,7 @@ class Login extends Component{
                 username,
                 password
             };
-            fetchLogin(data)
-            // dispatch(fetchLogin(data))
+            dispatch(fetchLogin(data))
         }
     }
 

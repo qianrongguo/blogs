@@ -37,7 +37,6 @@ class App extends Component {
     }
 
     componentWillMount() {
-        debugger;
         const {dispatch} = this.props;
         const token = window.sessionStorage.getItem('TOKEN')
         if (token) {
