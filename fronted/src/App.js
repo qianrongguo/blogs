@@ -7,42 +7,74 @@ import Header from "./components/Header";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import agent from './agent';
+import jwt_decode from 'jwt-decode';
 import {connect} from 'react-redux';
 import {onLoad, onRedirect} from "./actions/app";
 import {push} from 'react-router-redux';
+import {setCurrentUser} from './actions/signup'
 
 
 const mapStateToProps = state => {
-    console.log(state.signup.token, 'RRRRRRRRR');
-    return state
+    return {
+        appName:state.signup.appName,
+        redirectTo: state.signup.redirectTo,
+        currentUser: state.signup.currentUser
+    }
+};
+
+// const routes = (
+//     <div>
+//         <Header
+//             appName={this.props.appName}
+//             />
+//         <Switch>
+//             <Route exact path="/" component={Blogs}/>
+//             <Route path="/edit/:slug" component={Edit}/>
+//             <Route path="/edit" component={Edit}/>
+//             <Route path="/signup" component={Signup}/>
+//             <Route path="/login" component={Login}/>
+//         </Switch>
+//     </div>
+// );
+
+class Routes extends Component{
+    render(){
+        return (
+            <div>
+                <Header/>
+                <Switch>
+                    <Route exact path="/" component={Blogs}/>
+                    <Route path="/edit/:slug" component={Edit}/>
+                    <Route path="/edit" component={Edit}/>
+                    <Route path="/signup" component={Signup}/>
+                    <Route path="/login" component={Login}/>
+                </Switch>
+            </div>
+        )
+    }
+
 }
 
-const routes = (
-    <div>
-        <Header/>
-        <Switch>
-            <Route exact path="/" component={Blogs}/>
-            <Route path="/edit/:slug" component={Edit}/>
-            <Route path="/edit" component={Edit}/>
-            <Route path="/signup" component={Signup}/>
-            <Route path="/login" component={Login}/>
-        </Switch>
-    </div>
-);
 
 
 class App extends Component {
-    componentWillReceiveProps(nextProps){
-        console.log(nextProps,'yyyyyyyyyyyyy')
+    componentWillReceiveProps(nextProps) {
+        const {dispatch} = this.props;
+        if (nextProps.redirectTo) {
+            dispatch(push(nextProps.redirectTo));
+            dispatch(onRedirect())
+        }
     }
 
     componentWillMount() {
+        debugger;
         const {dispatch} = this.props;
-        const token = window.sessionStorage.getItem('TOKEN')
-        if (token) {
-            agent.setToken(token);
+        const token = localStorage.jwtToken;
+        if (token){
+            agent.setToken(token)
         }
-
+        const decoded = jwt_decode(token);
+        dispatch(setCurrentUser(decoded));
         dispatch(onLoad(token ? `http://localhost:3001` : null, token))
     }
 
@@ -51,7 +83,7 @@ class App extends Component {
         return (
             <div>
                 <ConnectedRouter history={history}>
-                    {routes}
+                    <Routes/>
                 </ConnectedRouter>
             </div>
         )

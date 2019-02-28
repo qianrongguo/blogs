@@ -1,8 +1,9 @@
 import {receive_blogs, request_blogs} from "./index";
 import agent from "../agent";
+import jwt_decode from 'jwt-decode';
 export const LOGIN = 'LOGIN';
 export const ReceiveToken = "receive_token";
-
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 
 export const UPDATE_FIELD_AUTH = 'UPDATE_FIELD_AUTH';
@@ -22,7 +23,6 @@ export const onChangeRePassword = value => {
 
 
 //创建一个数据
-
 export const RegisterSbmit = (data) => {
     fetch(`http://localhost:3000/signup`, {
         headers: {
@@ -35,7 +35,6 @@ export const RegisterSbmit = (data) => {
         .then(repsonse => console.log(repsonse, '___++++')).catch(e => console.log(e))
 
 };
-
 
 
 export const register = data => {
@@ -51,7 +50,15 @@ const saveToken = token => {
 };
 
 
-export const fetchLogin = (data) => dispatch =>{
+export const setCurrentUser = decoded => {
+    return {
+        type: SET_CURRENT_USER,
+        payload: decoded
+    }
+}
+
+//post数据，顺便将token放到signup.token
+export const fetchLogin = (data) => dispatch => {
     fetch(`http://localhost:3000/login`, {
         headers: {
             'Accept': 'application/json',
@@ -61,5 +68,7 @@ export const fetchLogin = (data) => dispatch =>{
         body: JSON.stringify(data),
     }).then(response =>
         response.json()
-    ).then(response=>{dispatch(saveToken(response))}).catch(e => console.log(e))
+    ).then(response => {
+        dispatch(saveToken(response));
+    }).catch(e => console.log(e))
 };

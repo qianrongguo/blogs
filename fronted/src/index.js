@@ -6,7 +6,7 @@ import configureStore, { history } from './configureStore'
 import * as serviceWorker from './serviceWorker';
 import App from "./App";
 
-const store = configureStore()
+const store = configureStore();
 const render = () => {
     ReactDOM.render(
         <AppContainer>
