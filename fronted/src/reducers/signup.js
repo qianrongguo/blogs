@@ -2,7 +2,8 @@ import {
     UPDATE_FIELD_AUTH,
     SET_CURRENT_USER,
     REREDIRECTDIRECT,
-    ReceiveToken} from "../actions/signup";
+    ReceiveToken,
+        LOGOUT} from "../actions/signup";
 import {REDIRECT} from "../actions/app"
 
 const defaultState = {
@@ -33,7 +34,15 @@ const SignUp = (state=defaultState,action) => {
         case REDIRECT:
             return {
                 ...state,
-                redirectTo:null
+                redirectTo:null,
+                user:null
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                redirectTo:'/',
+                token:null
+
             };
         default:
             return state

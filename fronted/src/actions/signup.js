@@ -2,6 +2,7 @@ import {receive_blogs, request_blogs} from "./index";
 import agent from "../agent";
 import jwt_decode from 'jwt-decode';
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 export const ReceiveToken = "receive_token";
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
@@ -54,6 +55,13 @@ export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
+    }
+};
+
+//登出
+export const logout = () => {
+    return {
+        type:LOGOUT
     }
 }
 

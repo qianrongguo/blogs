@@ -16,7 +16,7 @@ let mapStateToProps = state => {
 class Edit extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         const {dispatch} = this.props;
         const updateFieldEvent =
             key => ev => dispatch(onUpdateField(key, ev.target.value));
@@ -25,7 +25,7 @@ class Edit extends Component {
         //提交
         this.submitForm = ev => {
             debugger;
-            ev.preventDefault()
+            ev.preventDefault();
             const title = {
                 title: this.props.title
             };
@@ -38,7 +38,7 @@ class Edit extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps, '444444444')
+        console.log(nextProps, '444444444');
         const {dispatch} = this.props;
         if (this.props.match.params.slug !== nextProps.match.params.slug) {
             if (nextProps.match.params.slug) {

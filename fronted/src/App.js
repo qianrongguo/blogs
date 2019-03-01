@@ -12,30 +12,14 @@ import {connect} from 'react-redux';
 import {onLoad, onRedirect} from "./actions/app";
 import {push} from 'react-router-redux';
 import {setCurrentUser} from './actions/signup'
+import Logout from "./components/Logout";
 
 
 const mapStateToProps = state => {
     return {
-        appName:state.signup.appName,
-        redirectTo: state.signup.redirectTo,
-        currentUser: state.signup.currentUser
+        state
     }
 };
-
-// const routes = (
-//     <div>
-//         <Header
-//             appName={this.props.appName}
-//             />
-//         <Switch>
-//             <Route exact path="/" component={Blogs}/>
-//             <Route path="/edit/:slug" component={Edit}/>
-//             <Route path="/edit" component={Edit}/>
-//             <Route path="/signup" component={Signup}/>
-//             <Route path="/login" component={Login}/>
-//         </Switch>
-//     </div>
-// );
 
 class Routes extends Component{
     render(){
@@ -48,6 +32,7 @@ class Routes extends Component{
                     <Route path="/edit" component={Edit}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/logout" component={Logout}/>
                 </Switch>
             </div>
         )
@@ -73,8 +58,6 @@ class App extends Component {
         if (token){
             agent.setToken(token)
         }
-        const decoded = jwt_decode(token);
-        dispatch(setCurrentUser(decoded));
         dispatch(onLoad(token ? `http://localhost:3001` : null, token))
     }
 

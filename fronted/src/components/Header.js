@@ -6,19 +6,21 @@ const mapStateToProps = state => {
     return {
         appName:state.signup.appName,
         redirectTo: state.signup.redirectTo,
-        currentUser: state.signup.username
+        token:state.signup.token
     }
 };
 
+
+//判断有无用户名展示不同的页面
 class Header extends Component{
     render(){
-        if (this.props.currentUser){
+        if (this.props.token){
             return (
                 <div>
                     <ul>
                         <li><Link to='/'>blogs</Link></li>
                         <li><Link to='/edit'>New Post</Link></li>
-                        <li><Link to='/settings'>Settings</Link></li>
+                        <li><Link to='/logout'>logout</Link></li>
                     </ul>
                 </div>
             )
@@ -33,7 +35,6 @@ class Header extends Component{
                 </div>
             )
         }
-
     }
 }
 
