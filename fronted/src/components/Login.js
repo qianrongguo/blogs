@@ -17,7 +17,6 @@ class Login extends Component{
         this.changeUsername = ev => dispatch(onChangeUsername(ev.target.value));
         this.changePassword = ev => dispatch(onChangePassword(ev.target.value));
         this.submitForm = (username,password) => ev => {
-            debugger;
             ev.preventDefault();
             const data = {
                 username,
@@ -31,9 +30,7 @@ class Login extends Component{
         const {dispatch} = this.props;
         if (nextProps.redirectTo) {
             dispatch(push(nextProps.redirectTo));
-            dispatch(onRedirect())
         }
-
     }
 
     render(){

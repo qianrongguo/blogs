@@ -63,7 +63,7 @@ export const logout = () => {
     return {
         type:LOGOUT
     }
-}
+};
 
 //post数据，顺便将token放到signup.token
 export const fetchLogin = (data) => dispatch => {

@@ -13,16 +13,7 @@ if (process.env.NODE_ENV !== 'production'){
     middleware.push(createLogger())
 }
 
-// const localStorageMiddleware = store => next => action => {
-//     if (action.type === ReceiveToken ) {
-//         if (!action.error) {
-//             window.localStorage.setItem('jwt', action.token);
-//             agent.setToken(action.token);
-//         }
-//     }
-//
-//     next(action);
-// };
+
 export default function configureStore(preloadedState) {
     const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(

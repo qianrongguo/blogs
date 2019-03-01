@@ -20,4 +20,3 @@ const render = () => {
 
 render();
 
-// serviceWorker.unregister();

@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
-import {Route, Link, Switch} from 'react-router-dom'
 import {fetchEdit, onLoad, onSubmit, onUpdateField, onUnload} from "../actions/blog";
 import {updateField,createField} from '../actions'
 import {connect} from 'react-redux';
 
 
 let mapStateToProps = state => {
-    console.log(state.editor.title, '5555')
     return {
         title: state.editor.title
     }
@@ -37,17 +35,16 @@ class Edit extends Component {
     }
 
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps, '444444444');
-        const {dispatch} = this.props;
-        if (this.props.match.params.slug !== nextProps.match.params.slug) {
-            if (nextProps.match.params.slug) {
-                let slug = this.props.match.params.slug;
-                return dispatch(onLoad(fetchEdit(slug)));
-            }
-        }
-        dispatch(onLoad(null));
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     const {dispatch} = this.props;
+    //     if (this.props.match.params.slug !== nextProps.match.params.slug) {
+    //         if (nextProps.match.params.slug) {
+    //             let slug = this.props.match.params.slug;
+    //             return dispatch(onUpdateField(fetchEdit(slug)));
+    //         }
+    //     }
+    //     dispatch(onLoad(null));
+    // }
 
     componentWillMount() {
         let slug = this.props.match.params.slug;

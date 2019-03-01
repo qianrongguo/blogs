@@ -10,7 +10,8 @@ const Edit = (state = {}, action) => {
             };
         case ARTICLE_SUBMITTED:
             return {
-                ...state
+                ...state,
+                redirectTo:'/'
             };
         case UPDATE_FIELD_EDITOR:
             return {...state, [action.key]: action.value};

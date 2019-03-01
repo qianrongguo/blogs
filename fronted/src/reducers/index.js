@@ -3,7 +3,8 @@ import {RECEIVE_BLOG,REQUEST_BLOG} from "../actions/blog";
 import {combineReducers} from 'redux'
 import {connectRouter} from 'connected-react-router'
 import editor from './editor'
-import SignUp from './signup'
+import SignUp from './signup';
+import { routerReducer } from 'react-router-redux';
 
 const posts = (state = {
     isFetching: true

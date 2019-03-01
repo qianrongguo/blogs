@@ -17,7 +17,7 @@ import Logout from "./components/Logout";
 
 const mapStateToProps = state => {
     return {
-        state
+        redirectTo:state.signup.redirectTo
     }
 };
 
@@ -47,12 +47,10 @@ class App extends Component {
         const {dispatch} = this.props;
         if (nextProps.redirectTo) {
             dispatch(push(nextProps.redirectTo));
-            dispatch(onRedirect())
         }
     }
 
     componentWillMount() {
-        debugger;
         const {dispatch} = this.props;
         const token = localStorage.jwtToken;
         if (token){

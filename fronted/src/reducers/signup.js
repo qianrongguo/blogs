@@ -34,14 +34,14 @@ const SignUp = (state=defaultState,action) => {
         case REDIRECT:
             return {
                 ...state,
-                redirectTo:null,
+                redirectTo:'/',
                 user:null
             };
         case LOGOUT:
             return {
                 ...state,
-                redirectTo:'/',
-                token:null
+                token:null,
+                redirectTo:'/'
 
             };
         default:
