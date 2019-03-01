@@ -19,7 +19,8 @@ router.post('/', function (req, res,next) {
                 expiresIn: 60 * 2
             }) ;
             //发送token
-            res.status(200).send({token:token})
+
+            res.status(200).send(res.json({token:token}))
 
         }else {
             res.status(401).json({

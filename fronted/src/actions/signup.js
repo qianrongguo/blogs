@@ -76,7 +76,5 @@ export const fetchLogin = (data) => dispatch => {
         body: JSON.stringify(data),
     }).then(response =>
         response.json()
-    ).then(response => {
-        dispatch(saveToken(response));
-    }).catch(e => console.log(e))
+    ).then(response=>console.log(response,'9999999999999')).catch(e => console.log(e))
 };
