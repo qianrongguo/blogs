@@ -32,7 +32,7 @@
       <p>博客内容</p>
       <p>{{blog.content}}</p>
       <ul>
-        <li v-for="catogrioe in blog.categories" :key="catogrioe">{{catogrioe}}</li>
+        <li v-for="catogrioe in blog.categories"  :key="catogrioe">{{catogrioe}}</li>
       </ul>
       <p>作者：{{blog.author}}</p>
     </div>
